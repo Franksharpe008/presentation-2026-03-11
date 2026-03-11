@@ -1,0 +1,208 @@
+{
+  "project": "proof-to-profit",
+  "title": "Proof to Profit",
+  "subtitle": "Revenue Velocity Without Garbage Clients",
+  "voice_wav": "proof-to-profit-voice.wav",
+  "voice_mp3": "proof-to-profit-voice.mp3",
+  "film_cut_wav": "proof-to-profit-film-cut.wav",
+  "film_cut_mp3": "proof-to-profit-film-cut.mp3",
+  "score_bed": "score-bed.mp3",
+  "audio_files": [
+    "01-magnus-fast-cash-burns.wav",
+    "02-max-package-speed.wav",
+    "03-magnus-cheap-front-door.wav",
+    "04-max-proof-sprint.wav",
+    "05-magnus-where-margin-lives.wav",
+    "06-max-three-tier-model.wav",
+    "07-magnus-protects-margin.wav",
+    "08-max-compound-trust.wav"
+  ],
+  "scenes": [
+    {
+      "id": "scene-1",
+      "eyebrow": "Scene 1",
+      "title": "The Burn",
+      "image": "scene-1-burn.png",
+      "summary": "Magnus blocks the usual fast-cash trap. Max wants speed, but not at the cost of low-fit clients wrecking the calendar.",
+      "visual_direction": "Male founder in a premium night office, glowing revenue dashboards, pressure in the room.",
+      "timing": {
+        "start": 0.0,
+        "end": 13.688,
+        "duration": 13.688
+      },
+      "image_meta": {
+        "model": "runwayml/stable-diffusion-v1-5",
+        "prompt": "premium cinematic portrait of a determined male founder in a glass office at night, hovering revenue dashboards, blue amber lighting, luxury business aesthetic, ultra detailed, no text",
+        "negative_prompt": "blurry, low quality, watermark, logo, text, signature, extra fingers, deformed hands, cropped",
+        "device": "mps",
+        "dtype": "float32",
+        "height": 512,
+        "width": 512,
+        "steps": 20,
+        "guidance_scale": 7.5,
+        "seed": 71,
+        "load_seconds": 5.39,
+        "generation_seconds": 22.44,
+        "total_seconds": 27.89,
+        "output_path": "/Users/franksharpe/Documents/New project/output/proof-to-profit/scene-1-burn.png"
+      }
+    },
+    {
+      "id": "scene-2",
+      "eyebrow": "Scene 2",
+      "title": "The Filter",
+      "image": "scene-2-filter.png",
+      "summary": "Max reframes speed into a premium entry offer: a fast proof sprint that qualifies buyers instead of attracting chaos.",
+      "visual_direction": "Two male strategists in a glass war room, offer ladder hologram, premium startup energy.",
+      "timing": {
+        "start": 14.108,
+        "end": 29.665,
+        "duration": 15.557
+      },
+      "image_meta": {
+        "model": "runwayml/stable-diffusion-v1-5",
+        "prompt": "two male strategists in a glass war room, holographic offer ladder, premium startup branding, teal amber lighting, cinematic business scene, ultra detailed, no text",
+        "negative_prompt": "blurry, low quality, watermark, logo, text, signature, extra fingers, deformed hands, cropped",
+        "device": "mps",
+        "dtype": "float32",
+        "height": 512,
+        "width": 512,
+        "steps": 20,
+        "guidance_scale": 7.5,
+        "seed": 83,
+        "load_seconds": 4.84,
+        "generation_seconds": 40.79,
+        "total_seconds": 45.66,
+        "output_path": "/Users/franksharpe/Documents/New project/output/proof-to-profit/scene-2-filter.png"
+      }
+    },
+    {
+      "id": "scene-3",
+      "eyebrow": "Scene 3",
+      "title": "The Ladder",
+      "image": "scene-3-ladder.png",
+      "summary": "The model lands: Rapid Launch, Growth System, and Flagship Experience, each tier designed to protect margin and raise trust.",
+      "visual_direction": "Luxury presentation board, tiered service cards, masculine premium branding, cinematic light.",
+      "timing": {
+        "start": 30.085,
+        "end": 46.299,
+        "duration": 16.214
+      },
+      "image_meta": {
+        "model": "runwayml/stable-diffusion-v1-5",
+        "prompt": "luxury strategy table with three ascending glowing blocks, premium business composition, masculine hands pointing at the middle tier, elegant studio lighting, abstract growth ladder, no letters, no words, no signage, no screens, ultra detailed",
+        "negative_prompt": "blurry, low quality, watermark, logo, text, signature, extra fingers, deformed hands, cropped",
+        "device": "mps",
+        "dtype": "float32",
+        "height": 512,
+        "width": 512,
+        "steps": 18,
+        "guidance_scale": 7.5,
+        "seed": 211,
+        "load_seconds": 5.39,
+        "generation_seconds": 35.95,
+        "total_seconds": 41.37,
+        "output_path": "/Users/franksharpe/Documents/New project/output/proof-to-profit/scene-3-ladder.png"
+      }
+    },
+    {
+      "id": "scene-4",
+      "eyebrow": "Scene 4",
+      "title": "The Compound",
+      "image": "scene-4-compound.png",
+      "summary": "The argument resolves into a business engine: proof closes the deal, delivery creates margin, and retained trust compounds monthly.",
+      "visual_direction": "Sunrise keynote stage, city skyline beyond glass, confident business lift-off, masculine elegance.",
+      "timing": {
+        "start": 46.719,
+        "end": 59.567,
+        "duration": 12.848
+      },
+      "image_meta": {
+        "model": "runwayml/stable-diffusion-v1-5",
+        "prompt": "keynote stage at sunrise with confident male speaker silhouette, city skyline beyond glass, premium business success atmosphere, cinematic tech luxury, no text",
+        "negative_prompt": "blurry, low quality, watermark, logo, text, signature, extra fingers, deformed hands, cropped",
+        "device": "mps",
+        "dtype": "float32",
+        "height": 512,
+        "width": 512,
+        "steps": 18,
+        "guidance_scale": 7.5,
+        "seed": 109,
+        "load_seconds": 5.05,
+        "generation_seconds": 35.69,
+        "total_seconds": 40.78,
+        "output_path": "/Users/franksharpe/Documents/New project/output/proof-to-profit/scene-4-compound.png"
+      }
+    }
+  ],
+  "line_timing": [
+    {
+      "slug": "01-magnus-fast-cash-burns",
+      "scene": "scene-1",
+      "label": "Magnus/Codex",
+      "start": 0.0,
+      "end": 6.678,
+      "duration": 6.678
+    },
+    {
+      "slug": "02-max-package-speed",
+      "scene": "scene-1",
+      "label": "Max/OpenClaw",
+      "start": 7.098,
+      "end": 13.688,
+      "duration": 6.59
+    },
+    {
+      "slug": "03-magnus-cheap-front-door",
+      "scene": "scene-2",
+      "label": "Magnus/Codex",
+      "start": 14.108,
+      "end": 21.397,
+      "duration": 7.289
+    },
+    {
+      "slug": "04-max-proof-sprint",
+      "scene": "scene-2",
+      "label": "Max/OpenClaw",
+      "start": 21.817,
+      "end": 29.665,
+      "duration": 7.848
+    },
+    {
+      "slug": "05-magnus-where-margin-lives",
+      "scene": "scene-3",
+      "label": "Magnus/Codex",
+      "start": 30.085,
+      "end": 36.455,
+      "duration": 6.37
+    },
+    {
+      "slug": "06-max-three-tier-model",
+      "scene": "scene-3",
+      "label": "Max/OpenClaw",
+      "start": 36.875,
+      "end": 46.299,
+      "duration": 9.424
+    },
+    {
+      "slug": "07-magnus-protects-margin",
+      "scene": "scene-4",
+      "label": "Magnus/Codex",
+      "start": 46.719,
+      "end": 52.988,
+      "duration": 6.269
+    },
+    {
+      "slug": "08-max-compound-trust",
+      "scene": "scene-4",
+      "label": "Max/OpenClaw",
+      "start": 53.408,
+      "end": 59.567,
+      "duration": 6.159
+    }
+  ],
+  "profiles": {
+    "magnus_pitch_hz": 116.505,
+    "max_pitch_hz": 117.647
+  }
+}

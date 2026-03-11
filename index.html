@@ -1,273 +1,1297 @@
-<!DOCTYPE html>
+<!doctype html>
 <html lang="en">
-<head>
-  <meta charset="UTF-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>Presentation</title>
-  <style>
-    * {
-      margin: 0;
-      padding: 0;
-      box-sizing: border-box;
-    }
-
-    body {
-      font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif;
-      background: linear-gradient(135deg, #1a1a2e 0%, #16213e 50%, #0f3460 100%);
-      color: #fff;
-      min-height: 100vh;
-      overflow-x: hidden;
-    }
-
-    .container {
-      max-width: 1200px;
-      margin: 0 auto;
-      padding: 2rem;
-    }
-
-    .slide {
-      min-height: 100vh;
-      display: flex;
-      flex-direction: column;
-      justify-content: center;
-      align-items: center;
-      padding: 4rem 2rem;
-      opacity: 0;
-      transform: translateY(50px);
-      transition: all 0.8s ease;
-    }
-
-    .slide.visible {
-      opacity: 1;
-      transform: translateY(0);
-    }
-
-    h1 {
-      font-size: clamp(2.5rem, 8vw, 5rem);
-      font-weight: 800;
-      background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
-      -webkit-background-clip: text;
-      -webkit-text-fill-color: transparent;
-      background-clip: text;
-      text-align: center;
-      margin-bottom: 2rem;
-      line-height: 1.2;
-    }
-
-    h2 {
-      font-size: clamp(1.8rem, 5vw, 3rem);
-      font-weight: 700;
-      color: #f0f0f0;
-      text-align: center;
-      margin-bottom: 1.5rem;
-    }
-
-    p {
-      font-size: clamp(1.1rem, 2.5vw, 1.5rem);
-      line-height: 1.8;
-      color: #d0d0d0;
-      text-align: center;
-      max-width: 800px;
-      margin: 0 auto;
-    }
-
-    .highlight {
-      color: #667eea;
-      font-weight: 600;
-    }
-
-    .image-container {
-      width: 100%;
-      max-width: 900px;
-      height: 400px;
-      background: linear-gradient(135deg, #2d3748 0%, #1a202c 100%);
-      border-radius: 20px;
-      display: flex;
-      align-items: center;
-      justify-content: center;
-      margin: 3rem auto;
-      overflow: hidden;
-      box-shadow: 0 20px 60px rgba(0,0,0,0.5);
-    }
-
-    .image-container img {
-      width: 100%;
-      height: 100%;
-      object-fit: cover;
-      border-radius: 20px;
-    }
-
-    .image-placeholder {
-      font-size: 1.2rem;
-      color: #718096;
-    }
-
-    .audio-player {
-      position: fixed;
-      bottom: 2rem;
-      right: 2rem;
-      background: rgba(255,255,255,0.1);
-      backdrop-filter: blur(10px);
-      padding: 1rem 1.5rem;
-      border-radius: 50px;
-      border: 1px solid rgba(255,255,255,0.2);
-      z-index: 1000;
-    }
-
-    .audio-player button {
-      background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
-      border: none;
-      color: white;
-      padding: 0.8rem 2rem;
-      border-radius: 50px;
-      font-size: 1rem;
-      font-weight: 600;
-      cursor: pointer;
-      transition: transform 0.3s ease, box-shadow 0.3s ease;
-    }
-
-    .audio-player button:hover {
-      transform: scale(1.05);
-      box-shadow: 0 10px 30px rgba(102,126,234,0.4);
-    }
-
-    .progress-dots {
-      position: fixed;
-      top: 2rem;
-      right: 2rem;
-      display: flex;
-      gap: 0.5rem;
-      z-index: 1000;
-    }
-
-    .dot {
-      width: 12px;
-      height: 12px;
-      border-radius: 50%;
-      background: rgba(255,255,255,0.3);
-      transition: all 0.3s ease;
-      cursor: pointer;
-    }
-
-    .dot.active {
-      background: #667eea;
-      transform: scale(1.3);
-    }
-
-    .dot:hover {
-      background: rgba(102,126,234,0.7);
-    }
-
-    @media (max-width: 768px) {
-      .container {
-        padding: 1rem;
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <title>Sharpe Digital | 7-Day Revenue Sprint</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    <link href="https://fonts.googleapis.com/css2?family=Manrope:wght@400;500;600;700;800&family=Cormorant+Garamond:wght@500;600;700&family=JetBrains+Mono:wght@500;700&display=swap" rel="stylesheet" />
+    <style>
+      :root {
+        --bg: #071019;
+        --bg-2: #0d1722;
+        --panel: rgba(11, 20, 31, 0.74);
+        --panel-solid: rgba(9, 16, 26, 0.94);
+        --ink: #f4f6f8;
+        --muted: #9aa8b7;
+        --line: rgba(255,255,255,0.09);
+        --teal: #7fe4da;
+        --gold: #e5ba6e;
+        --danger: #ef8f75;
       }
 
-      .slide {
-        padding: 2rem 1rem;
+      * { box-sizing: border-box; }
+
+      html { scroll-behavior: smooth; }
+
+      body {
+        margin: 0;
+        color: var(--ink);
+        font-family: "Manrope", system-ui, sans-serif;
+        background:
+          radial-gradient(circle at 12% 10%, rgba(127, 228, 218, 0.16), transparent 26rem),
+          radial-gradient(circle at 86% 14%, rgba(229, 186, 110, 0.15), transparent 24rem),
+          linear-gradient(160deg, #03070b 0%, #071019 48%, #09131d 100%);
+        min-height: 100vh;
       }
 
-      .image-container {
-        height: 250px;
+      body::before {
+        content: "";
+        position: fixed;
+        inset: 0;
+        pointer-events: none;
+        background-image:
+          linear-gradient(rgba(255,255,255,0.05) 1px, transparent 1px),
+          linear-gradient(90deg, rgba(255,255,255,0.05) 1px, transparent 1px);
+        background-size: 120px 120px;
+        mask-image: radial-gradient(circle at center, black, transparent 82%);
+        opacity: 0.12;
       }
 
-      .audio-player {
-        bottom: 1rem;
-        right: 1rem;
-        padding: 0.8rem 1.2rem;
+      a { color: inherit; text-decoration: none; }
+
+      .splash {
+        position: fixed;
+        inset: 0;
+        z-index: 40;
+        display: grid;
+        place-items: center;
+        padding: 24px;
+        background:
+          radial-gradient(circle at 20% 20%, rgba(127, 228, 218, 0.2), transparent 22rem),
+          radial-gradient(circle at 80% 20%, rgba(229, 186, 110, 0.2), transparent 22rem),
+          linear-gradient(160deg, rgba(3,7,11,0.96), rgba(7,16,25,0.98));
+        transition: opacity 420ms ease, visibility 420ms ease;
       }
 
-      .progress-dots {
-        top: 1rem;
-        right: 1rem;
+      .splash.is-hidden {
+        opacity: 0;
+        visibility: hidden;
+        pointer-events: none;
       }
-    }
-  </style>
-</head>
-<body>
-  <div class="audio-player">
-    <button id="playAudio">▶ Play Audio</button>
-  </div>
 
-  <div class="progress-dots" id="progressDots">
-    <div class="dot active" data-slide="0"></div>
-    <div class="dot" data-slide="1"></div>
-    <div class="dot" data-slide="2"></div>
-  </div>
+      .splash::before,
+      .splash::after {
+        content: "";
+        position: absolute;
+        border-radius: 999px;
+        filter: blur(18px);
+        animation: drift 8s ease-in-out infinite alternate;
+      }
 
-  <div class="container">
-    <section class="slide visible" data-slide="0">
-      <h1>Something Amazing</h1>
-      <p>A journey through <span class="highlight">visuals</span>, <span class="highlight">sound</span>, and <span class="highlight">story</span></p>
-      <div class="image-container">
-        <div class="image-placeholder">Visual loading...</div>
+      .splash::before {
+        width: 20rem;
+        height: 20rem;
+        background: rgba(127, 228, 218, 0.12);
+        top: 8%;
+        left: 6%;
+      }
+
+      .splash::after {
+        width: 18rem;
+        height: 18rem;
+        background: rgba(229, 186, 110, 0.12);
+        right: 10%;
+        bottom: 12%;
+        animation-duration: 11s;
+      }
+
+      @keyframes drift {
+        from { transform: translate3d(0,0,0) scale(1); }
+        to { transform: translate3d(12px,-18px,0) scale(1.08); }
+      }
+
+      .splash-card {
+        position: relative;
+        width: min(760px, 100%);
+        padding: 32px;
+        border: 1px solid var(--line);
+        border-radius: 32px;
+        background: rgba(10, 18, 28, 0.78);
+        backdrop-filter: blur(24px);
+        box-shadow: 0 40px 120px rgba(0,0,0,0.4);
+      }
+
+      .brand-lockup {
+        margin: 0 0 12px;
+        color: var(--teal);
+        font: 700 12px/1.2 "JetBrains Mono", monospace;
+        text-transform: uppercase;
+        letter-spacing: 0.16em;
+      }
+
+      .splash-title {
+        margin: 0;
+        font-family: "Cormorant Garamond", serif;
+        font-size: clamp(56px, 9vw, 94px);
+        line-height: 0.9;
+      }
+
+      .splash-copy {
+        max-width: 42rem;
+        margin: 16px 0 0;
+        color: #d6dee5;
+        font-size: 19px;
+        line-height: 1.7;
+      }
+
+      .intent-grid {
+        display: grid;
+        gap: 14px;
+        margin-top: 28px;
+      }
+
+      .intent-button {
+        width: 100%;
+        padding: 18px 20px;
+        border-radius: 20px;
+        border: 1px solid var(--line);
+        background: linear-gradient(135deg, rgba(255,255,255,0.03), rgba(255,255,255,0.01));
+        color: var(--ink);
+        font: inherit;
+        text-align: left;
+        cursor: pointer;
+        transition: transform 180ms ease, border-color 180ms ease, background 180ms ease;
+      }
+
+      .intent-button:hover {
+        transform: translateY(-2px);
+        border-color: rgba(127, 228, 218, 0.4);
+        background: linear-gradient(135deg, rgba(127, 228, 218, 0.12), rgba(229, 186, 110, 0.08));
+      }
+
+      .intent-button strong {
+        display: block;
+        margin-bottom: 6px;
+        font-size: 18px;
+      }
+
+      .intent-button span {
+        color: var(--muted);
+        font-size: 14px;
+      }
+
+      .splash-note {
+        margin-top: 18px;
+        color: var(--muted);
+        font-size: 13px;
+      }
+
+      .page {
+        opacity: 0;
+        transform: translateY(16px);
+        transition: opacity 520ms ease, transform 520ms ease;
+      }
+
+      .page.is-ready {
+        opacity: 1;
+        transform: none;
+      }
+
+      .topbar {
+        position: sticky;
+        top: 0;
+        z-index: 20;
+        display: flex;
+        justify-content: space-between;
+        align-items: center;
+        gap: 16px;
+        width: min(1220px, calc(100vw - 28px));
+        margin: 0 auto;
+        padding: 18px 0 10px;
+        backdrop-filter: blur(18px);
+      }
+
+      .topbar-brand {
+        color: var(--teal);
+        font: 700 12px/1.2 "JetBrains Mono", monospace;
+        text-transform: uppercase;
+        letter-spacing: 0.16em;
+      }
+
+      .topbar-cta {
+        padding: 12px 18px;
+        border-radius: 999px;
+        background: linear-gradient(135deg, rgba(127, 228, 218, 0.18), rgba(229, 186, 110, 0.16));
+        border: 1px solid rgba(127, 228, 218, 0.28);
+        font: 700 12px/1.1 "JetBrains Mono", monospace;
+      }
+
+      main {
+        width: min(1220px, calc(100vw - 28px));
+        margin: 0 auto;
+        padding: 10px 0 96px;
+      }
+
+      .hero {
+        display: grid;
+        grid-template-columns: 1.08fr 0.92fr;
+        gap: 0;
+        overflow: hidden;
+        border: 1px solid var(--line);
+        border-radius: 32px;
+        background: rgba(9, 16, 26, 0.72);
+        box-shadow: 0 32px 120px rgba(0,0,0,0.38);
+      }
+
+      .hero-copy {
+        padding: 34px 34px 28px;
+        background:
+          linear-gradient(145deg, rgba(7,13,22,0.98), rgba(9,16,26,0.84)),
+          radial-gradient(circle at top left, rgba(127,228,218,0.16), transparent 20rem);
+      }
+
+      .hero-title {
+        margin: 0;
+        font-family: "Cormorant Garamond", serif;
+        font-size: clamp(64px, 9vw, 110px);
+        line-height: 0.9;
+        letter-spacing: -0.04em;
+      }
+
+      .hero-subtitle {
+        margin: 14px 0 0;
+        color: var(--teal);
+        font: 700 17px/1.4 "JetBrains Mono", monospace;
+      }
+
+      .hero-copy p {
+        max-width: 40rem;
+      }
+
+      .hero-lead {
+        margin: 18px 0 0;
+        color: #d6dee5;
+        font-size: 20px;
+        line-height: 1.75;
+      }
+
+      .metric-row {
+        display: grid;
+        grid-template-columns: repeat(4, minmax(0, 1fr));
+        gap: 12px;
+        margin-top: 22px;
+      }
+
+      .metric-card {
+        padding: 16px;
+        border-radius: 22px;
+        border: 1px solid var(--line);
+        background: rgba(255,255,255,0.03);
+      }
+
+      .metric-value {
+        display: block;
+        font: 800 28px/1 "Manrope", sans-serif;
+      }
+
+      .metric-label {
+        display: block;
+        margin-top: 8px;
+        color: var(--muted);
+        font-size: 13px;
+        line-height: 1.45;
+      }
+
+      .hero-actions {
+        display: flex;
+        gap: 12px;
+        flex-wrap: wrap;
+        margin-top: 24px;
+      }
+
+      .button {
+        padding: 14px 20px;
+        border-radius: 999px;
+        border: 1px solid var(--line);
+        font: 700 13px/1.1 "JetBrains Mono", monospace;
+      }
+
+      .button-primary {
+        background: linear-gradient(135deg, rgba(127,228,218,0.22), rgba(229,186,110,0.18));
+        border-color: rgba(127, 228, 218, 0.32);
+      }
+
+      .button-secondary {
+        background: rgba(255,255,255,0.02);
+      }
+
+      .trust-rail {
+        display: flex;
+        flex-wrap: wrap;
+        gap: 10px;
+        margin-top: 22px;
+      }
+
+      .trust-pill {
+        padding: 10px 14px;
+        border-radius: 999px;
+        border: 1px solid var(--line);
+        background: rgba(255,255,255,0.03);
+        color: var(--muted);
+        font: 700 12px/1.1 "JetBrains Mono", monospace;
+      }
+
+      .hero-visual {
+        position: relative;
+        min-height: 38rem;
+        overflow: hidden;
+      }
+
+      .hero-visual::after {
+        content: "";
+        position: absolute;
+        inset: 0;
+        background:
+          linear-gradient(180deg, rgba(7,16,25,0.06), rgba(7,16,25,0.46)),
+          radial-gradient(circle at 20% 20%, rgba(127,228,218,0.10), transparent 32%);
+      }
+
+      .hero-visual img {
+        width: 100%;
+        height: 100%;
+        object-fit: cover;
+        transform: scale(1.04);
+        filter: saturate(0.92) contrast(1.04);
+      }
+
+      .hero-float {
+        position: absolute;
+        right: 20px;
+        bottom: 20px;
+        width: min(320px, calc(100% - 40px));
+        padding: 18px;
+        border-radius: 24px;
+        border: 1px solid rgba(255,255,255,0.12);
+        background: rgba(8, 14, 22, 0.78);
+        backdrop-filter: blur(14px);
+        z-index: 2;
+      }
+
+      .hero-float p {
+        margin: 0;
+      }
+
+      .hero-float strong {
+        display: block;
+        margin-bottom: 8px;
+        color: var(--gold);
+        font: 700 12px/1.2 "JetBrains Mono", monospace;
+        text-transform: uppercase;
+        letter-spacing: 0.14em;
+      }
+
+      .section {
+        margin-top: 24px;
+        padding: 26px;
+        border-radius: 28px;
+        border: 1px solid var(--line);
+        background: rgba(9,16,26,0.68);
+        box-shadow: 0 24px 84px rgba(0,0,0,0.24);
+      }
+
+      .section-head {
+        display: flex;
+        justify-content: space-between;
+        gap: 20px;
+        align-items: end;
+        margin-bottom: 18px;
+      }
+
+      .section-head h2 {
+        margin: 0;
+        font-family: "Cormorant Garamond", serif;
+        font-size: clamp(40px, 6vw, 62px);
+        line-height: 0.94;
+      }
+
+      .section-head p {
+        max-width: 34rem;
+        margin: 0;
+        color: var(--muted);
+        line-height: 1.7;
+      }
+
+      .scene-grid,
+      .fit-grid,
+      .offer-grid,
+      .principle-grid,
+      .transcript-grid {
+        display: grid;
+        gap: 14px;
+      }
+
+      .scene-grid { grid-template-columns: repeat(2, minmax(0, 1fr)); }
+      .fit-grid { grid-template-columns: repeat(3, minmax(0, 1fr)); }
+      .offer-grid { grid-template-columns: repeat(3, minmax(0, 1fr)); }
+      .principle-grid { grid-template-columns: repeat(5, minmax(0, 1fr)); }
+      .transcript-grid { grid-template-columns: repeat(2, minmax(0, 1fr)); }
+
+      .scene-card,
+      .fit-card,
+      .offer-card,
+      .principle-card,
+      .transcript-card,
+      .signup-card,
+      .audio-card {
+        border-radius: 24px;
+        border: 1px solid var(--line);
+        background: rgba(255,255,255,0.03);
+        overflow: hidden;
+      }
+
+      .scene-card {
+        cursor: pointer;
+        transition: transform 180ms ease, border-color 180ms ease, box-shadow 180ms ease;
+      }
+
+      .scene-card:hover,
+      .scene-card.is-active {
+        transform: translateY(-2px);
+        border-color: rgba(127, 228, 218, 0.38);
+        box-shadow: 0 18px 48px rgba(0,0,0,0.28);
+      }
+
+      .scene-image-wrap {
+        position: relative;
+        height: 16rem;
+        overflow: hidden;
+        background: #08111a;
+      }
+
+      .scene-image {
+        width: 100%;
+        height: 100%;
+        object-fit: cover;
+        transform: scale(1.05);
+        filter: saturate(0.86) contrast(1.05);
+      }
+
+      .scene-mask {
+        position: absolute;
+        inset: 0;
+        background:
+          linear-gradient(180deg, rgba(8,14,22,0.05), rgba(8,14,22,0.48)),
+          linear-gradient(0deg, rgba(8,14,22,0.74), transparent 34%);
+      }
+
+      .scene-copy,
+      .fit-card,
+      .offer-card,
+      .principle-card,
+      .transcript-card,
+      .signup-card,
+      .audio-card {
+        padding: 18px;
+      }
+
+      .scene-count,
+      .fit-tag,
+      .offer-kicker,
+      .transcript-role {
+        margin: 0 0 8px;
+        color: var(--teal);
+        font: 700 12px/1.2 "JetBrains Mono", monospace;
+        text-transform: uppercase;
+        letter-spacing: 0.14em;
+      }
+
+      .scene-copy h3,
+      .fit-card h3,
+      .offer-card h3,
+      .principle-card h3 {
+        margin: 0;
+        font-size: 24px;
+        line-height: 1.28;
+      }
+
+      .scene-copy p,
+      .fit-card p,
+      .offer-card p,
+      .principle-card p,
+      .transcript-card p,
+      .audio-copy p,
+      .signup-copy p {
+        color: #d6dee5;
+        line-height: 1.7;
+      }
+
+      .scene-meta {
+        display: flex;
+        justify-content: space-between;
+        gap: 12px;
+        margin-top: 14px;
+        color: var(--muted);
+        font: 700 11px/1.2 "JetBrains Mono", monospace;
+        text-transform: uppercase;
+        letter-spacing: 0.12em;
+      }
+
+      .audio-shell {
+        display: grid;
+        grid-template-columns: 0.92fr 1.08fr;
+        gap: 14px;
+      }
+
+      .audio-title {
+        margin: 0;
+        font-size: 28px;
+      }
+
+      .audio-note {
+        margin-top: 12px;
+      }
+
+      .track-switcher {
+        display: flex;
+        gap: 10px;
+        flex-wrap: wrap;
+        margin-top: 16px;
+      }
+
+      .track-button {
+        padding: 12px 16px;
+        border-radius: 999px;
+        border: 1px solid var(--line);
+        background: rgba(255,255,255,0.02);
+        color: var(--ink);
+        font: 700 12px/1 "JetBrains Mono", monospace;
+        cursor: pointer;
+      }
+
+      .track-button.active {
+        background: linear-gradient(135deg, rgba(127,228,218,0.22), rgba(229,186,110,0.16));
+        border-color: rgba(127,228,218,0.34);
+      }
+
+      .active-scene {
+        margin-top: 10px;
+        color: var(--gold);
+        font: 700 12px/1.2 "JetBrains Mono", monospace;
+        text-transform: uppercase;
+        letter-spacing: 0.12em;
+      }
+
+      audio {
+        width: 100%;
+        margin-top: 18px;
+      }
+
+      .transcript-time {
+        margin: 0 0 8px;
+        color: var(--muted);
+        font: 700 11px/1.2 "JetBrains Mono", monospace;
+        text-transform: uppercase;
+        letter-spacing: 0.12em;
+      }
+
+      .transcript-text {
+        margin: 0;
+        font-size: 16px;
+      }
+
+      .signup-shell {
+        display: grid;
+        grid-template-columns: 0.92fr 1.08fr;
+        gap: 14px;
+      }
+
+      .signup-copy h2 {
+        margin: 0;
+        font-family: "Cormorant Garamond", serif;
+        font-size: clamp(44px, 6vw, 68px);
+        line-height: 0.94;
+      }
+
+      .signup-form {
+        display: grid;
+        gap: 12px;
+        margin-top: 18px;
+      }
+
+      .field-grid {
+        display: grid;
+        grid-template-columns: repeat(2, minmax(0, 1fr));
+        gap: 12px;
+      }
+
+      .signup-form label {
+        display: grid;
+        gap: 6px;
+        color: var(--muted);
+        font-size: 13px;
+      }
+
+      .signup-form input,
+      .signup-form select,
+      .signup-form textarea {
+        width: 100%;
+        padding: 14px 15px;
+        border-radius: 16px;
+        border: 1px solid rgba(255,255,255,0.1);
+        background: rgba(255,255,255,0.03);
+        color: var(--ink);
+        font: inherit;
+      }
+
+      .signup-form textarea {
+        min-height: 110px;
+        resize: vertical;
+      }
+
+      .signup-submit {
+        padding: 15px 18px;
+        border: 0;
+        border-radius: 999px;
+        background: linear-gradient(135deg, rgba(127,228,218,0.24), rgba(229,186,110,0.20));
+        color: var(--ink);
+        font: 800 12px/1.1 "JetBrains Mono", monospace;
+        text-transform: uppercase;
+        letter-spacing: 0.12em;
+        cursor: pointer;
+      }
+
+      .result-card {
+        display: none;
+        margin-top: 16px;
+        padding: 16px;
+        border-radius: 18px;
+        border: 1px solid rgba(127,228,218,0.28);
+        background: rgba(127,228,218,0.08);
+      }
+
+      .result-card.is-visible {
+        display: block;
+      }
+
+      .result-card strong {
+        display: block;
+        margin-bottom: 8px;
+        color: var(--gold);
+        font: 700 12px/1.2 "JetBrains Mono", monospace;
+        text-transform: uppercase;
+        letter-spacing: 0.12em;
+      }
+
+      .reveal {
+        opacity: 0;
+        transform: translateY(18px);
+        transition: opacity 500ms ease, transform 500ms ease;
+      }
+
+      .reveal.is-visible {
+        opacity: 1;
+        transform: none;
+      }
+
+      @media (max-width: 1080px) {
+        .metric-row,
+        .fit-grid,
+        .offer-grid,
+        .principle-grid,
+        .transcript-grid {
+          grid-template-columns: repeat(2, minmax(0, 1fr));
+        }
+      }
+
+      @media (max-width: 900px) {
+        .hero,
+        .audio-shell,
+        .signup-shell,
+        .scene-grid {
+          grid-template-columns: 1fr;
+        }
+
+        .hero-visual {
+          min-height: 22rem;
+        }
+
+        .section-head {
+          display: grid;
+        }
+      }
+
+      @media (max-width: 680px) {
+        .metric-row,
+        .fit-grid,
+        .offer-grid,
+        .principle-grid,
+        .transcript-grid,
+        .field-grid {
+          grid-template-columns: 1fr;
+        }
+
+        .topbar,
+        main {
+          width: min(100vw - 18px, 1220px);
+        }
+
+        .hero-copy,
+        .section,
+        .scene-copy,
+        .fit-card,
+        .offer-card,
+        .principle-card,
+        .transcript-card,
+        .signup-card,
+        .audio-card {
+          padding: 16px;
+        }
+      }
+    </style>
+  </head>
+  <body>
+    <div class="splash" id="splash">
+      <div class="splash-card">
+        <p class="brand-lockup">Sharpe Digital</p>
+        <h1 class="splash-title">What should this fix first?</h1>
+        <p class="splash-copy">Pick the outcome the buyer wants most. The page shifts its framing around that choice so the pitch feels relevant before the visitor ever reaches the form.</p>
+        <div class="intent-grid">
+          <button class="intent-button" type="button" data-focus="appointments">
+            <strong>Book more qualified calls</strong>
+            <span>Lead with cleaner demand, stronger trust, and less tire-kicker traffic.</span>
+          </button>
+          <button class="intent-button" type="button" data-focus="premium">
+            <strong>Close higher-ticket work</strong>
+            <span>Lead with authority, positioning, and a front end that feels expensive.</span>
+          </button>
+          <button class="intent-button" type="button" data-focus="recurring">
+            <strong>Create recurring revenue</strong>
+            <span>Lead with retention logic, structured upsells, and better long-term value.</span>
+          </button>
+        </div>
+        <p class="splash-note">This is the first psychological step: one easy choice, then a tailored message.</p>
       </div>
-    </section>
+    </div>
 
-    <section class="slide" data-slide="1">
-      <h2>The Middle</h2>
-      <p>Where everything comes together in perfect harmony</p>
-      <div class="image-container">
-        <div class="image-placeholder">Visual loading...</div>
-      </div>
-    </section>
+    <div class="page" id="page">
+      <header class="topbar">
+        <a href="#top" class="topbar-brand">Sharpe Digital</a>
+        <a href="#signup" class="topbar-cta">Request The Sprint</a>
+      </header>
 
-    <section class="slide" data-slide="2">
-      <h2>The End</h2>
-      <p>But really just the beginning of something new</p>
-      <div class="image-container">
-        <div class="image-placeholder">Visual loading...</div>
-      </div>
-    </section>
-  </div>
+      <main id="top">
+        <section class="hero">
+          <div class="hero-copy">
+            <p class="brand-lockup">7-Day Revenue Sprint</p>
+            <h1 class="hero-title" id="hero-title">Turn first impressions into booked revenue.</h1>
+            <p class="hero-subtitle" id="hero-subtitle">A fast proof asset, a premium offer ladder, and a cleaner path to better clients.</p>
+            <p class="hero-lead" id="hero-lead">This page is built to do what most agency pages fail to do: reduce doubt quickly, frame the offer clearly, and give the buyer one easy next step that feels low-risk and high-control.</p>
+            <div class="metric-row">
+              <article class="metric-card">
+                <span class="metric-value" data-counter="7">0</span>
+                <span class="metric-label">days to the first proof asset</span>
+              </article>
+              <article class="metric-card">
+                <span class="metric-value" data-counter="3">0</span>
+                <span class="metric-label">offer tiers instead of a muddy custom quote</span>
+              </article>
+              <article class="metric-card">
+                <span class="metric-value" data-counter="1">0</span>
+                <span class="metric-label">primary CTA to cut choice drag</span>
+              </article>
+              <article class="metric-card">
+                <span class="metric-value" data-counter="0">0</span>
+                <span class="metric-label">vendor lock-in on the finished asset</span>
+              </article>
+            </div>
+            <div class="hero-actions">
+              <a class="button button-primary" href="#signup" id="primary-cta">Request The Sprint</a>
+              <a class="button button-secondary" href="#boardroom">Hear The 60-Second Boardroom Cut</a>
+            </div>
+            <div class="trust-rail">
+              <span class="trust-pill">Specific pricing</span>
+              <span class="trust-pill">Owned assets</span>
+              <span class="trust-pill">Premium front door</span>
+              <span class="trust-pill">Cleaner lead quality</span>
+            </div>
+          </div>
+          <div class="hero-visual">
+            <img src="hero.png" alt="Premium business presentation visual" />
+            <div class="hero-float">
+              <strong>Why this converts</strong>
+              <p>Concrete timeline. Clear ladder. Reduced risk. Premium feel. One next step. The page is designed to feel decisive before it tries to feel clever.</p>
+            </div>
+          </div>
+        </section>
 
-  <script>
-    const slides = document.querySelectorAll('.slide');
-    const dots = document.querySelectorAll('.dot');
-    let currentSlide = 0;
+        <section class="section reveal">
+          <div class="section-head">
+            <div>
+              <p class="brand-lockup">Decision architecture</p>
+              <h2>What buyers feel before they buy.</h2>
+            </div>
+            <p>High-converting pages lower confusion, increase specificity, and make the first commitment feel easy. This section turns those principles into visible structure.</p>
+          </div>
+          <div class="principle-grid">
+            <article class="principle-card reveal">
+              <h3>Specific beats abstract</h3>
+              <p>Concrete timeframes, prices, and outcomes reduce doubt faster than broad creative promises.</p>
+            </article>
+<article class="principle-card reveal">
+              <h3>One clear next step</h3>
+              <p>A single decision path lowers cognitive drag and keeps the buyer moving.</p>
+            </article>
+<article class="principle-card reveal">
+              <h3>Fit over volume</h3>
+              <p>The page is framed to attract the right buyer, not every possible buyer.</p>
+            </article>
+<article class="principle-card reveal">
+              <h3>Lower perceived risk</h3>
+              <p>The sprint acts as a proof layer before the bigger commitment.</p>
+            </article>
+<article class="principle-card reveal">
+              <h3>Trust is visual first</h3>
+              <p>The shell is built to feel expensive, deliberate, and controlled before a word is read.</p>
+            </article>
+          </div>
+        </section>
 
-    function showSlide(index) {
-      slides.forEach((slide, i) => {
-        slide.classList.toggle('visible', i === index);
+        <section class="section reveal">
+          <div class="section-head">
+            <div>
+              <p class="brand-lockup">Best-fit demand</p>
+              <h2>Built for firms that need better buyers, not more noise.</h2>
+            </div>
+            <p>These are mock business profiles, but they reflect the kinds of buyers who respond best to a premium front end and a fast proof offer.</p>
+          </div>
+          <div class="fit-grid">
+            <article class="fit-card reveal">
+              <p class="fit-tag">Local Service</p>
+              <h3>Atlas HVAC</h3>
+              <p>Booked installs without drowning in low-intent quote requests.</p>
+            </article>
+<article class="fit-card reveal">
+              <p class="fit-tag">Professional Service</p>
+              <h3>Northline Dental</h3>
+              <p>More premium consults with a front end that feels trustworthy immediately.</p>
+            </article>
+<article class="fit-card reveal">
+              <p class="fit-tag">Advisory / Legal</p>
+              <h3>Harbor Legal Group</h3>
+              <p>Authority, clarity, and a cleaner path into retained relationships.</p>
+            </article>
+          </div>
+        </section>
+
+        <section class="section reveal">
+          <div class="section-head">
+            <div>
+              <p class="brand-lockup">Offer ladder</p>
+              <h2>One fast proof, then a clean climb.</h2>
+            </div>
+            <p>The offer sequence is designed to protect margin, improve trust, and qualify serious buyers without forcing everyone into the same project shape.</p>
+          </div>
+          <div class="offer-grid">
+            <article class="offer-card reveal">
+              <p class="offer-kicker">$3,000</p>
+              <h3>Rapid Launch</h3>
+              <p class="offer-promise">A 7-day proof asset with one visible business outcome.</p>
+              <p class="offer-fit">Best when you need fast proof and cleaner lead quality.</p>
+            </article>
+<article class="offer-card reveal">
+              <p class="offer-kicker">$8,000</p>
+              <h3>Growth System</h3>
+              <p class="offer-promise">A multi-page conversion system with tighter calls-to-action and better qualification.</p>
+              <p class="offer-fit">Best when lead volume exists but close quality is inconsistent.</p>
+            </article>
+<article class="offer-card reveal">
+              <p class="offer-kicker">$18,000</p>
+              <h3>Flagship Experience</h3>
+              <p class="offer-promise">A premium front end for higher-ticket work, stronger trust, and retained value.</p>
+              <p class="offer-fit">Best when positioning and margin matter more than raw lead count.</p>
+            </article>
+          </div>
+        </section>
+
+        <section class="section reveal" id="boardroom">
+          <div class="section-head">
+            <div>
+              <p class="brand-lockup">Boardroom cut</p>
+              <h2>A 60-second demonstration of the offer logic.</h2>
+            </div>
+            <p>The narration stays inside the business problem: speed versus quality, proof versus margin, and why the premium ladder wins.</p>
+          </div>
+          <div class="audio-shell">
+            <article class="audio-card">
+              <p class="brand-lockup">Narrative</p>
+              <h3 class="audio-title">Play the film cut or strip it down to voice only.</h3>
+              <p class="audio-note">This is the same underlying media, but the page presents it as a client-facing story rather than exposing the machinery that built it.</p>
+              <div class="track-switcher">
+                <button class="track-button active" type="button" data-track="film">Play Film Cut</button>
+                <button class="track-button" type="button" data-track="voice">Play Voice Only</button>
+              </div>
+              <p class="active-scene" id="active-scene">Current moment: The Burn</p>
+              <audio id="master-audio" controls preload="metadata" src="proof-to-profit-film-cut.mp3"></audio>
+            </article>
+            <div class="transcript-grid">
+              <article class="transcript-card reveal" data-start="0.0" data-end="6.678">
+              <p class="transcript-role">Architect</p>
+              <p class="transcript-time">0.00s - 6.68s</p>
+              <p class="transcript-text">Fast cash from low-fit clients looks good for a week and burns the business for a quarter.</p>
+            </article>
+<article class="transcript-card reveal" data-start="7.098" data-end="13.688">
+              <p class="transcript-role">Operator</p>
+              <p class="transcript-time">7.10s - 13.69s</p>
+              <p class="transcript-text">Then stop selling custom chaos. Package the speed so revenue moves without letting bad clients through the front door.</p>
+            </article>
+<article class="transcript-card reveal" data-start="14.108" data-end="21.397">
+              <p class="transcript-role">Architect</p>
+              <p class="transcript-time">14.11s - 21.40s</p>
+              <p class="transcript-text">A cheap front door invites cheap behavior. I do not want a pipeline full of people who never should have entered.</p>
+            </article>
+<article class="transcript-card reveal" data-start="21.817" data-end="29.665">
+              <p class="transcript-role">Operator</p>
+              <p class="transcript-time">21.82s - 29.66s</p>
+              <p class="transcript-text">Make the front door premium and narrow. Seven days. Three thousand dollars. One visible business outcome. That is a filter, not a coupon.</p>
+            </article>
+<article class="transcript-card reveal" data-start="30.085" data-end="36.455">
+              <p class="transcript-role">Architect</p>
+              <p class="transcript-time">30.09s - 36.45s</p>
+              <p class="transcript-text">Good. Then where does the margin live after the sprint. I want the ladder, not just the hook.</p>
+            </article>
+<article class="transcript-card reveal" data-start="36.875" data-end="46.299">
+              <p class="transcript-role">Operator</p>
+              <p class="transcript-time">36.88s - 46.30s</p>
+              <p class="transcript-text">Tier two is the eight-thousand-dollar growth system. Tier three is the eighteen-thousand-dollar flagship experience. Proof opens the deal. Delivery raises the value.</p>
+            </article>
+<article class="transcript-card reveal" data-start="46.719" data-end="52.988">
+              <p class="transcript-role">Architect</p>
+              <p class="transcript-time">46.72s - 52.99s</p>
+              <p class="transcript-text">That keeps velocity without stuffing the calendar with bad-fit revenue. It protects time, margin, and trust.</p>
+            </article>
+<article class="transcript-card reveal" data-start="53.408" data-end="59.567">
+              <p class="transcript-role">Operator</p>
+              <p class="transcript-time">53.41s - 59.57s</p>
+              <p class="transcript-text">Exactly. Sell proof first, build margin second, and let retained trust compound into the real business.</p>
+            </article>
+            </div>
+          </div>
+        </section>
+
+        <section class="section reveal">
+          <div class="section-head">
+            <div>
+              <p class="brand-lockup">Scene strip</p>
+              <h2>Click the moments that do the selling.</h2>
+            </div>
+            <p>Each visual frame is treated as atmosphere, not as a place to cram information. The actual selling lives in the typography, hierarchy, and decision path.</p>
+          </div>
+          <div class="scene-grid">
+            <article class="scene-card reveal" data-scene="scene-1" data-title="The Burn" data-start="0.0" data-end="13.688">
+              <div class="scene-image-wrap">
+                <img src="scene-1-burn.png" alt="The Burn" class="scene-image" />
+                <div class="scene-mask"></div>
+              </div>
+              <div class="scene-copy">
+                <p class="scene-count">01</p>
+                <p class="eyebrow">The Burn</p>
+                <h3>The Burn</h3>
+                <p>Magnus blocks the usual fast-cash trap. Max wants speed, but not at the cost of low-fit clients wrecking the calendar.</p>
+                <p>Male founder in a premium night office, glowing revenue dashboards, pressure in the room.</p>
+                <div class="scene-meta">
+                  <span>13.69s runtime</span>
+                  <span>Click to jump</span>
+                </div>
+              </div>
+            </article>
+<article class="scene-card reveal" data-scene="scene-2" data-title="The Filter" data-start="14.108" data-end="29.665">
+              <div class="scene-image-wrap">
+                <img src="scene-2-filter.png" alt="The Filter" class="scene-image" />
+                <div class="scene-mask"></div>
+              </div>
+              <div class="scene-copy">
+                <p class="scene-count">02</p>
+                <p class="eyebrow">The Filter</p>
+                <h3>The Filter</h3>
+                <p>Max reframes speed into a premium entry offer: a fast proof sprint that qualifies buyers instead of attracting chaos.</p>
+                <p>Two male strategists in a glass war room, offer ladder hologram, premium startup energy.</p>
+                <div class="scene-meta">
+                  <span>15.56s runtime</span>
+                  <span>Click to jump</span>
+                </div>
+              </div>
+            </article>
+<article class="scene-card reveal" data-scene="scene-3" data-title="The Ladder" data-start="30.085" data-end="46.299">
+              <div class="scene-image-wrap">
+                <img src="scene-3-ladder.png" alt="The Ladder" class="scene-image" />
+                <div class="scene-mask"></div>
+              </div>
+              <div class="scene-copy">
+                <p class="scene-count">03</p>
+                <p class="eyebrow">The Ladder</p>
+                <h3>The Ladder</h3>
+                <p>The model lands: Rapid Launch, Growth System, and Flagship Experience, each tier designed to protect margin and raise trust.</p>
+                <p>Luxury presentation board, tiered service cards, masculine premium branding, cinematic light.</p>
+                <div class="scene-meta">
+                  <span>16.21s runtime</span>
+                  <span>Click to jump</span>
+                </div>
+              </div>
+            </article>
+<article class="scene-card reveal" data-scene="scene-4" data-title="The Compound" data-start="46.719" data-end="59.567">
+              <div class="scene-image-wrap">
+                <img src="scene-4-compound.png" alt="The Compound" class="scene-image" />
+                <div class="scene-mask"></div>
+              </div>
+              <div class="scene-copy">
+                <p class="scene-count">04</p>
+                <p class="eyebrow">The Compound</p>
+                <h3>The Compound</h3>
+                <p>The argument resolves into a business engine: proof closes the deal, delivery creates margin, and retained trust compounds monthly.</p>
+                <p>Sunrise keynote stage, city skyline beyond glass, confident business lift-off, masculine elegance.</p>
+                <div class="scene-meta">
+                  <span>12.85s runtime</span>
+                  <span>Click to jump</span>
+                </div>
+              </div>
+            </article>
+          </div>
+        </section>
+
+        <section class="section reveal" id="signup">
+          <div class="signup-shell">
+            <div class="signup-copy">
+              <p class="brand-lockup">Application step</p>
+              <h2>Request the sprint.</h2>
+              <p>This is the low-friction commitment point. The visitor gives only enough signal to qualify the next move, and the page immediately reframes the recommendation instead of dumping them into a blank contact wall.</p>
+              <p id="focus-note">Start by choosing the revenue problem you want to solve first, then use the form to stage the recommendation.</p>
+            </div>
+            <article class="signup-card">
+              <form class="signup-form" id="signup-form">
+                <div class="field-grid">
+                  <label>Full name
+                    <input name="name" required placeholder="Jordan Reed" />
+                  </label>
+                  <label>Work email
+                    <input name="email" type="email" required placeholder="jordan@company.com" />
+                  </label>
+                </div>
+                <div class="field-grid">
+                  <label>Company
+                    <input name="company" required placeholder="Northline Dental" />
+                  </label>
+                  <label>Vertical
+                    <select name="vertical" required>
+                      <option value="">Choose one</option>
+                      <option>Local service</option>
+                      <option>Professional service</option>
+                      <option>E-commerce</option>
+                      <option>Advisor / consultant</option>
+                    </select>
+                  </label>
+                </div>
+                <div class="field-grid">
+                  <label>Monthly revenue band
+                    <select name="revenue" required>
+                      <option value="">Choose one</option>
+                      <option value="early">Under $50k</option>
+                      <option value="growth">$50k - $250k</option>
+                      <option value="scale">$250k+</option>
+                    </select>
+                  </label>
+                  <label>Main constraint
+                    <select name="constraint" required>
+                      <option value="">Choose one</option>
+                      <option value="lead-quality">Lead quality</option>
+                      <option value="premium-positioning">Premium positioning</option>
+                      <option value="retention">Retention / recurring revenue</option>
+                    </select>
+                  </label>
+                </div>
+                <label>What does the current front end get wrong?
+                  <textarea name="note" placeholder="Example: we get traffic, but the wrong people keep asking for cheap work."></textarea>
+                </label>
+                <button class="signup-submit" type="submit">Stage The Recommendation</button>
+              </form>
+              <div class="result-card" id="result-card">
+                <strong>Recommendation drafted</strong>
+                <p id="result-text"></p>
+              </div>
+            </article>
+          </div>
+        </section>
+      </main>
+    </div>
+
+    <script>
+      const manifest = {"tracks": {"film": "proof-to-profit-film-cut.mp3", "voice": "proof-to-profit-voice.mp3"}, "scenes": {"scene-1": {"start": 0.0, "end": 13.688, "duration": 13.688}, "scene-2": {"start": 14.108, "end": 29.665, "duration": 15.557}, "scene-3": {"start": 30.085, "end": 46.299, "duration": 16.214}, "scene-4": {"start": 46.719, "end": 59.567, "duration": 12.848}}};
+      const splash = document.getElementById("splash");
+      const page = document.getElementById("page");
+      const heroTitle = document.getElementById("hero-title");
+      const heroSubtitle = document.getElementById("hero-subtitle");
+      const heroLead = document.getElementById("hero-lead");
+      const primaryCta = document.getElementById("primary-cta");
+      const focusNote = document.getElementById("focus-note");
+      const masterAudio = document.getElementById("master-audio");
+      const activeScene = document.getElementById("active-scene");
+      const trackButtons = [...document.querySelectorAll(".track-button")];
+      const sceneCards = [...document.querySelectorAll(".scene-card")];
+      const transcriptCards = [...document.querySelectorAll(".transcript-card")];
+      const revealNodes = [...document.querySelectorAll(".reveal")];
+      const counters = [...document.querySelectorAll("[data-counter]")];
+      const signupForm = document.getElementById("signup-form");
+      const resultCard = document.getElementById("result-card");
+      const resultText = document.getElementById("result-text");
+
+      const focusMap = {
+        appointments: {
+          title: "Book more qualified calls without inviting bad-fit leads.",
+          subtitle: "A premium front end that filters noise, sharpens demand, and moves serious buyers forward.",
+          lead: "The fastest path is not more traffic. It is cleaner intent, clearer trust, and one next step that feels easy for the right buyer and expensive for the wrong one.",
+          cta: "Request A Call-Quality Sprint",
+          note: "The page is currently framed around better appointments and cleaner lead quality.",
+        },
+        premium: {
+          title: "Close higher-ticket work with a front end that feels expensive.",
+          subtitle: "Positioning, proof, and controlled specificity that support premium pricing.",
+          lead: "Higher-ticket buyers decide quickly when the offer feels precise, the visuals feel deliberate, and the entry step lowers risk without lowering status.",
+          cta: "Request A Premium Positioning Sprint",
+          note: "The page is currently framed around premium positioning and stronger close quality.",
+        },
+        recurring: {
+          title: "Create recurring revenue from a system clients trust.",
+          subtitle: "A front end that supports retention logic, cleaner upsells, and longer client value.",
+          lead: "Recurring revenue starts earlier than retention emails. It starts with a buyer journey that feels ordered, credible, and worth staying inside after the first win.",
+          cta: "Request A Retention Revenue Sprint",
+          note: "The page is currently framed around retention logic and recurring revenue growth.",
+        },
+      };
+
+      function applyFocus(focus) {
+        const current = focusMap[focus] || focusMap.appointments;
+        heroTitle.textContent = current.title;
+        heroSubtitle.textContent = current.subtitle;
+        heroLead.textContent = current.lead;
+        primaryCta.textContent = current.cta;
+        focusNote.textContent = current.note;
+        localStorage.setItem("sharpe_digital_focus", focus);
+      }
+
+      function enterExperience(focus) {
+        applyFocus(focus);
+        splash.classList.add("is-hidden");
+        page.classList.add("is-ready");
+      }
+
+      document.querySelectorAll(".intent-button").forEach((button) => {
+        button.addEventListener("click", () => enterExperience(button.dataset.focus));
       });
-      dots.forEach((dot, i) => {
-        dot.classList.toggle('active', i === index);
-      });
-      currentSlide = index;
-    }
 
-    dots.forEach((dot, index) => {
-      dot.addEventListener('click', () => showSlide(index));
-    });
-
-    document.addEventListener('keydown', (e) => {
-      if (e.key === 'ArrowRight' || e.key === ' ') {
-        e.preventDefault();
-        showSlide((currentSlide + 1) % slides.length);
-      } else if (e.key === 'ArrowLeft') {
-        showSlide((currentSlide - 1 + slides.length) % slides.length);
+      const savedFocus = localStorage.getItem("sharpe_digital_focus");
+      if (savedFocus && focusMap[savedFocus]) {
+        enterExperience(savedFocus);
       }
-    });
 
-    const playBtn = document.getElementById('playAudio');
-    let audio = null;
-
-    playBtn.addEventListener('click', () => {
-      if (!audio) {
-        audio = new Audio('audio.mp3');
-        audio.addEventListener('ended', () => {
-          playBtn.textContent = '▶ Play Audio';
+      function updateActiveScene() {
+        const current = masterAudio.currentTime || 0;
+        let label = "Current moment: The Burn";
+        sceneCards.forEach((card) => {
+          const start = Number(card.dataset.start || 0);
+          const end = Number(card.dataset.end || 0);
+          const active = current >= start && current <= end;
+          card.classList.toggle("is-active", active);
+          if (active) {
+            const title = card.dataset.title || card.querySelector("h3")?.textContent || "Active scene";
+            label = "Current moment: " + title;
+          }
         });
-        audio.play();
-        playBtn.textContent = '⏸ Pause';
-      } else if (audio.paused) {
-        audio.play();
-        playBtn.textContent = '⏸ Pause';
-      } else {
-        audio.pause();
-        playBtn.textContent = '▶ Play Audio';
+        transcriptCards.forEach((card) => {
+          const start = Number(card.dataset.start || 0);
+          const end = Number(card.dataset.end || 0);
+          card.classList.toggle("is-active", current >= start && current <= end);
+        });
+        activeScene.textContent = label;
       }
-    });
-  </script>
-</body>
+
+      function setTrack(track) {
+        const src = manifest.tracks[track];
+        if (!src) return;
+        const wasPlaying = !masterAudio.paused;
+        masterAudio.src = src;
+        masterAudio.load();
+        if (wasPlaying) masterAudio.play().catch(() => {});
+        trackButtons.forEach((button) => button.classList.toggle("active", button.dataset.track === track));
+      }
+
+      trackButtons.forEach((button) => {
+        button.addEventListener("click", () => setTrack(button.dataset.track));
+      });
+
+      sceneCards.forEach((card) => {
+        card.addEventListener("click", () => {
+          masterAudio.currentTime = Number(card.dataset.start || 0);
+          masterAudio.play().catch(() => {});
+          updateActiveScene();
+        });
+      });
+
+      masterAudio.addEventListener("timeupdate", updateActiveScene);
+      masterAudio.addEventListener("loadedmetadata", updateActiveScene);
+      masterAudio.addEventListener("play", updateActiveScene);
+
+      const revealObserver = new IntersectionObserver((entries) => {
+        entries.forEach((entry) => {
+          if (entry.isIntersecting) {
+            entry.target.classList.add("is-visible");
+            revealObserver.unobserve(entry.target);
+          }
+        });
+      }, { threshold: 0.12 });
+      revealNodes.forEach((node) => revealObserver.observe(node));
+
+      const counterObserver = new IntersectionObserver((entries) => {
+        entries.forEach((entry) => {
+          if (!entry.isIntersecting) return;
+          const node = entry.target;
+          const goal = Number(node.dataset.counter || 0);
+          let frame = 0;
+          const totalFrames = 28;
+          const tick = () => {
+            frame += 1;
+            const value = Math.round((goal * frame) / totalFrames);
+            node.textContent = String(value);
+            if (frame < totalFrames) requestAnimationFrame(tick);
+          };
+          tick();
+          counterObserver.unobserve(node);
+        });
+      }, { threshold: 0.35 });
+      counters.forEach((node) => counterObserver.observe(node));
+
+      function recommendTier(revenue, constraint) {
+        if (revenue === "scale" || constraint === "premium-positioning") {
+          return {
+            tier: "Flagship Experience",
+            note: "Lead with authority, premium positioning, and a stronger retained relationship path.",
+          };
+        }
+        if (revenue === "growth" || constraint === "retention") {
+          return {
+            tier: "Growth System",
+            note: "Lead with cleaner conversion flow, stronger qualification, and better follow-through after the first win.",
+          };
+        }
+        return {
+          tier: "Rapid Launch",
+          note: "Lead with the shortest path to proof so the buyer sees motion without committing to the full build yet.",
+        };
+      }
+
+      signupForm.addEventListener("submit", (event) => {
+        event.preventDefault();
+        const formData = new FormData(signupForm);
+        const name = formData.get("name");
+        const company = formData.get("company");
+        const revenue = formData.get("revenue");
+        const constraint = formData.get("constraint");
+        const focus = localStorage.getItem("sharpe_digital_focus") || "appointments";
+        const recommendation = recommendTier(revenue, constraint);
+        resultText.textContent = name + ", " + company + " is best staged into " + recommendation.tier + ". Focus first on " + focus.replace("-", " ") + ". " + recommendation.note;
+        resultCard.classList.add("is-visible");
+        localStorage.setItem("sharpe_digital_application", JSON.stringify(Object.fromEntries(formData.entries())));
+      });
+    </script>
+  </body>
 </html>
