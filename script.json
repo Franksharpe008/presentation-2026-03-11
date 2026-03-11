@@ -1,0 +1,19 @@
+{
+  "slides": [
+    {
+      "id": 0,
+      "text": "Something Amazing. A journey through visuals, sound, and story.",
+      "timing": "0:00-0:08"
+    },
+    {
+      "id": 1,
+      "text": "The Middle. Where everything comes together in perfect harmony.",
+      "timing": "0:09-0:16"
+    },
+    {
+      "id": 2,
+      "text": "The End. But really just the beginning of something new.",
+      "timing": "0:17-0:25"
+    }
+  ]
+}

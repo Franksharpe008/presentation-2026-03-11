@@ -1,0 +1,273 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Presentation</title>
+  <style>
+    * {
+      margin: 0;
+      padding: 0;
+      box-sizing: border-box;
+    }
+
+    body {
+      font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif;
+      background: linear-gradient(135deg, #1a1a2e 0%, #16213e 50%, #0f3460 100%);
+      color: #fff;
+      min-height: 100vh;
+      overflow-x: hidden;
+    }
+
+    .container {
+      max-width: 1200px;
+      margin: 0 auto;
+      padding: 2rem;
+    }
+
+    .slide {
+      min-height: 100vh;
+      display: flex;
+      flex-direction: column;
+      justify-content: center;
+      align-items: center;
+      padding: 4rem 2rem;
+      opacity: 0;
+      transform: translateY(50px);
+      transition: all 0.8s ease;
+    }
+
+    .slide.visible {
+      opacity: 1;
+      transform: translateY(0);
+    }
+
+    h1 {
+      font-size: clamp(2.5rem, 8vw, 5rem);
+      font-weight: 800;
+      background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+      -webkit-background-clip: text;
+      -webkit-text-fill-color: transparent;
+      background-clip: text;
+      text-align: center;
+      margin-bottom: 2rem;
+      line-height: 1.2;
+    }
+
+    h2 {
+      font-size: clamp(1.8rem, 5vw, 3rem);
+      font-weight: 700;
+      color: #f0f0f0;
+      text-align: center;
+      margin-bottom: 1.5rem;
+    }
+
+    p {
+      font-size: clamp(1.1rem, 2.5vw, 1.5rem);
+      line-height: 1.8;
+      color: #d0d0d0;
+      text-align: center;
+      max-width: 800px;
+      margin: 0 auto;
+    }
+
+    .highlight {
+      color: #667eea;
+      font-weight: 600;
+    }
+
+    .image-container {
+      width: 100%;
+      max-width: 900px;
+      height: 400px;
+      background: linear-gradient(135deg, #2d3748 0%, #1a202c 100%);
+      border-radius: 20px;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      margin: 3rem auto;
+      overflow: hidden;
+      box-shadow: 0 20px 60px rgba(0,0,0,0.5);
+    }
+
+    .image-container img {
+      width: 100%;
+      height: 100%;
+      object-fit: cover;
+      border-radius: 20px;
+    }
+
+    .image-placeholder {
+      font-size: 1.2rem;
+      color: #718096;
+    }
+
+    .audio-player {
+      position: fixed;
+      bottom: 2rem;
+      right: 2rem;
+      background: rgba(255,255,255,0.1);
+      backdrop-filter: blur(10px);
+      padding: 1rem 1.5rem;
+      border-radius: 50px;
+      border: 1px solid rgba(255,255,255,0.2);
+      z-index: 1000;
+    }
+
+    .audio-player button {
+      background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+      border: none;
+      color: white;
+      padding: 0.8rem 2rem;
+      border-radius: 50px;
+      font-size: 1rem;
+      font-weight: 600;
+      cursor: pointer;
+      transition: transform 0.3s ease, box-shadow 0.3s ease;
+    }
+
+    .audio-player button:hover {
+      transform: scale(1.05);
+      box-shadow: 0 10px 30px rgba(102,126,234,0.4);
+    }
+
+    .progress-dots {
+      position: fixed;
+      top: 2rem;
+      right: 2rem;
+      display: flex;
+      gap: 0.5rem;
+      z-index: 1000;
+    }
+
+    .dot {
+      width: 12px;
+      height: 12px;
+      border-radius: 50%;
+      background: rgba(255,255,255,0.3);
+      transition: all 0.3s ease;
+      cursor: pointer;
+    }
+
+    .dot.active {
+      background: #667eea;
+      transform: scale(1.3);
+    }
+
+    .dot:hover {
+      background: rgba(102,126,234,0.7);
+    }
+
+    @media (max-width: 768px) {
+      .container {
+        padding: 1rem;
+      }
+
+      .slide {
+        padding: 2rem 1rem;
+      }
+
+      .image-container {
+        height: 250px;
+      }
+
+      .audio-player {
+        bottom: 1rem;
+        right: 1rem;
+        padding: 0.8rem 1.2rem;
+      }
+
+      .progress-dots {
+        top: 1rem;
+        right: 1rem;
+      }
+    }
+  </style>
+</head>
+<body>
+  <div class="audio-player">
+    <button id="playAudio">▶ Play Audio</button>
+  </div>
+
+  <div class="progress-dots" id="progressDots">
+    <div class="dot active" data-slide="0"></div>
+    <div class="dot" data-slide="1"></div>
+    <div class="dot" data-slide="2"></div>
+  </div>
+
+  <div class="container">
+    <section class="slide visible" data-slide="0">
+      <h1>Something Amazing</h1>
+      <p>A journey through <span class="highlight">visuals</span>, <span class="highlight">sound</span>, and <span class="highlight">story</span></p>
+      <div class="image-container">
+        <div class="image-placeholder">Visual loading...</div>
+      </div>
+    </section>
+
+    <section class="slide" data-slide="1">
+      <h2>The Middle</h2>
+      <p>Where everything comes together in perfect harmony</p>
+      <div class="image-container">
+        <div class="image-placeholder">Visual loading...</div>
+      </div>
+    </section>
+
+    <section class="slide" data-slide="2">
+      <h2>The End</h2>
+      <p>But really just the beginning of something new</p>
+      <div class="image-container">
+        <div class="image-placeholder">Visual loading...</div>
+      </div>
+    </section>
+  </div>
+
+  <script>
+    const slides = document.querySelectorAll('.slide');
+    const dots = document.querySelectorAll('.dot');
+    let currentSlide = 0;
+
+    function showSlide(index) {
+      slides.forEach((slide, i) => {
+        slide.classList.toggle('visible', i === index);
+      });
+      dots.forEach((dot, i) => {
+        dot.classList.toggle('active', i === index);
+      });
+      currentSlide = index;
+    }
+
+    dots.forEach((dot, index) => {
+      dot.addEventListener('click', () => showSlide(index));
+    });
+
+    document.addEventListener('keydown', (e) => {
+      if (e.key === 'ArrowRight' || e.key === ' ') {
+        e.preventDefault();
+        showSlide((currentSlide + 1) % slides.length);
+      } else if (e.key === 'ArrowLeft') {
+        showSlide((currentSlide - 1 + slides.length) % slides.length);
+      }
+    });
+
+    const playBtn = document.getElementById('playAudio');
+    let audio = null;
+
+    playBtn.addEventListener('click', () => {
+      if (!audio) {
+        audio = new Audio('audio.mp3');
+        audio.addEventListener('ended', () => {
+          playBtn.textContent = '▶ Play Audio';
+        });
+        audio.play();
+        playBtn.textContent = '⏸ Pause';
+      } else if (audio.paused) {
+        audio.play();
+        playBtn.textContent = '⏸ Pause';
+      } else {
+        audio.pause();
+        playBtn.textContent = '▶ Play Audio';
+      }
+    });
+  </script>
+</body>
+</html>
