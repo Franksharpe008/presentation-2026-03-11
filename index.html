@@ -4,6 +4,9 @@
     <meta charset="utf-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1" />
     <title>Sharpe Digital | 7-Day Revenue Sprint</title>
+    <meta name="description" content="Sharpe Digital's boardroom-style revenue sprint deck: positioning, proof, offer ladder, and a live qualification path." />
+    <meta name="theme-color" content="#071019" />
+    <link rel="icon" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 64 64'%3E%3Crect width='64' height='64' rx='16' fill='%23071019'/%3E%3Ctext x='50%25' y='56%25' text-anchor='middle' font-size='28' font-family='Arial, sans-serif' font-weight='700' fill='%237fe4da'%3ESD%3C/text%3E%3C/svg%3E" />
     <link rel="preconnect" href="https://fonts.googleapis.com" />
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
     <link href="https://fonts.googleapis.com/css2?family=Manrope:wght@400;500;600;700;800&family=Cormorant+Garamond:wght@500;600;700&family=JetBrains+Mono:wght@500;700&display=swap" rel="stylesheet" />
@@ -417,7 +420,9 @@
       .fit-grid,
       .offer-grid,
       .principle-grid,
-      .transcript-grid {
+      .transcript-grid,
+      .timeline-grid,
+      .calc-output-grid {
         display: grid;
         gap: 14px;
       }
@@ -427,12 +432,16 @@
       .offer-grid { grid-template-columns: repeat(3, minmax(0, 1fr)); }
       .principle-grid { grid-template-columns: repeat(5, minmax(0, 1fr)); }
       .transcript-grid { grid-template-columns: repeat(2, minmax(0, 1fr)); }
+      .timeline-grid { grid-template-columns: repeat(4, minmax(0, 1fr)); }
+      .calc-output-grid { grid-template-columns: repeat(2, minmax(0, 1fr)); }
 
       .scene-card,
       .fit-card,
       .offer-card,
       .principle-card,
       .transcript-card,
+      .timeline-card,
+      .calculator-card,
       .signup-card,
       .audio-card {
         border-radius: 24px;
@@ -481,6 +490,8 @@
       .offer-card,
       .principle-card,
       .transcript-card,
+      .timeline-card,
+      .calculator-card,
       .signup-card,
       .audio-card {
         padding: 18px;
@@ -489,7 +500,9 @@
       .scene-count,
       .fit-tag,
       .offer-kicker,
-      .transcript-role {
+      .transcript-role,
+      .timeline-day,
+      .calc-label {
         margin: 0 0 8px;
         color: var(--teal);
         font: 700 12px/1.2 "JetBrains Mono", monospace;
@@ -532,6 +545,69 @@
         display: grid;
         grid-template-columns: 0.92fr 1.08fr;
         gap: 14px;
+      }
+
+      .calculator-shell {
+        display: grid;
+        grid-template-columns: 0.94fr 1.06fr;
+        gap: 14px;
+      }
+
+      .calculator-grid {
+        display: grid;
+        grid-template-columns: repeat(2, minmax(0, 1fr));
+        gap: 12px;
+        margin-top: 16px;
+      }
+
+      .calc-field {
+        display: grid;
+        gap: 6px;
+        color: var(--muted);
+        font-size: 13px;
+      }
+
+      .calc-field input {
+        width: 100%;
+        padding: 14px 15px;
+        border-radius: 16px;
+        border: 1px solid rgba(255,255,255,0.1);
+        background: rgba(255,255,255,0.03);
+        color: var(--ink);
+        font: inherit;
+      }
+
+      .calc-output {
+        padding: 16px;
+        border-radius: 18px;
+        border: 1px solid rgba(255,255,255,0.08);
+        background: rgba(255,255,255,0.03);
+      }
+
+      .calc-value {
+        display: block;
+        margin-top: 6px;
+        font-family: "Cormorant Garamond", serif;
+        font-size: clamp(34px, 5vw, 54px);
+        line-height: 0.92;
+      }
+
+      .calc-note,
+      .calc-summary,
+      .fine-print,
+      .signup-status {
+        color: var(--muted);
+        line-height: 1.7;
+      }
+
+      .calc-summary {
+        margin-top: 16px;
+        color: #d6dee5;
+      }
+
+      .fine-print {
+        margin-top: 14px;
+        font-size: 13px;
       }
 
       .audio-title {
@@ -589,6 +665,12 @@
       .transcript-text {
         margin: 0;
         font-size: 16px;
+      }
+
+      .timeline-card h3 {
+        margin: 0;
+        font-size: 24px;
+        line-height: 1.2;
       }
 
       .signup-shell {
@@ -652,6 +734,33 @@
         cursor: pointer;
       }
 
+      .signup-submit:disabled {
+        opacity: 0.65;
+        cursor: wait;
+      }
+
+      .signup-status {
+        margin: 12px 0 0;
+        font-size: 14px;
+      }
+
+      .signup-status.status-ok {
+        color: var(--teal);
+      }
+
+      .signup-status.status-warn {
+        color: var(--gold);
+      }
+
+      .field-hidden {
+        position: absolute;
+        left: -9999px;
+        width: 1px;
+        height: 1px;
+        opacity: 0;
+        pointer-events: none;
+      }
+
       .result-card {
         display: none;
         margin-top: 16px;
@@ -690,13 +799,16 @@
         .fit-grid,
         .offer-grid,
         .principle-grid,
-        .transcript-grid {
+        .transcript-grid,
+        .timeline-grid,
+        .calc-output-grid {
           grid-template-columns: repeat(2, minmax(0, 1fr));
         }
       }
 
       @media (max-width: 900px) {
         .hero,
+        .calculator-shell,
         .audio-shell,
         .signup-shell,
         .scene-grid {
@@ -718,7 +830,10 @@
         .offer-grid,
         .principle-grid,
         .transcript-grid,
-        .field-grid {
+        .timeline-grid,
+        .field-grid,
+        .calculator-grid,
+        .calc-output-grid {
           grid-template-columns: 1fr;
         }
 
@@ -905,6 +1020,107 @@
           </div>
         </section>
 
+        <section class="section reveal" id="business-case">
+          <div class="section-head">
+            <div>
+              <p class="brand-lockup">Business case</p>
+              <h2>Model the upside before the first call.</h2>
+            </div>
+            <p>This is a directional estimator for decision-making, not a promise. It helps the buyer see what cleaner intent, better positioning, and a stronger front end could unlock over the next 90 days.</p>
+          </div>
+          <div class="calculator-shell">
+            <article class="calculator-card">
+              <p class="brand-lockup">Inputs</p>
+              <h3 class="audio-title">Use the current numbers, not fantasy numbers.</h3>
+              <p class="calc-note">The point is to create a sober business case. Enterprise buyers trust realism more than inflated upside.</p>
+              <div class="calculator-grid">
+                <label class="calc-field">Monthly inbound leads
+                  <input data-calc="leads" type="number" min="0" value="40" />
+                </label>
+                <label class="calc-field">Current close rate (%)
+                  <input data-calc="close" type="number" min="0" max="100" value="18" />
+                </label>
+                <label class="calc-field">Average deal value ($)
+                  <input data-calc="deal" type="number" min="0" value="4500" />
+                </label>
+                <label class="calc-field">Bad-fit lead share (%)
+                  <input data-calc="badfit" type="number" min="0" max="100" value="35" />
+                </label>
+              </div>
+              <p class="fine-print">Assumption set: the sprint improves qualification, trims bad-fit demand, and lifts close quality modestly instead of making absurd revenue claims.</p>
+            </article>
+            <article class="calculator-card">
+              <p class="brand-lockup">Executive readout</p>
+              <div class="calc-output-grid">
+                <div class="calc-output">
+                  <p class="calc-label">Qualified leads / month</p>
+                  <strong class="calc-value" id="calc-qualified">26</strong>
+                </div>
+                <div class="calc-output">
+                  <p class="calc-label">Recovered hours / quarter</p>
+                  <strong class="calc-value" id="calc-hours">32</strong>
+                </div>
+                <div class="calc-output">
+                  <p class="calc-label">Estimated 90-day upside</p>
+                  <strong class="calc-value" id="calc-upside">$24k</strong>
+                </div>
+                <div class="calc-output">
+                  <p class="calc-label">Best entry point</p>
+                  <strong class="calc-value" id="calc-tier">Growth System</strong>
+                </div>
+              </div>
+              <p class="calc-summary" id="calc-summary">At this profile, the real win is not more noise. It is recovering time, improving close quality, and moving the buyer into a cleaner offer ladder.</p>
+            </article>
+          </div>
+        </section>
+
+        <section class="section reveal">
+          <div class="section-head">
+            <div>
+              <p class="brand-lockup">Execution map</p>
+              <h2>What happens in the 7-day sprint.</h2>
+            </div>
+            <p>The page should not just look premium. It should make the buyer feel the work is controlled, finite, and executable by adults who know how to ship.</p>
+          </div>
+          <div class="timeline-grid">
+            <article class="timeline-card reveal">
+              <p class="timeline-day">Day 1</p>
+              <h3>Positioning lock</h3>
+              <p>We choose the ICP, the promise, the proof path, and the one CTA that matters.</p>
+            </article>
+<article class="timeline-card reveal">
+              <p class="timeline-day">Day 2</p>
+              <h3>Message system</h3>
+              <p>We build the headline stack, objection handling, and offer ladder around the buyer's actual economics.</p>
+            </article>
+<article class="timeline-card reveal">
+              <p class="timeline-day">Day 3</p>
+              <h3>Visual authority</h3>
+              <p>We design the front end so the page feels premium before the buyer reads deeply.</p>
+            </article>
+<article class="timeline-card reveal">
+              <p class="timeline-day">Day 4</p>
+              <h3>Media layer</h3>
+              <p>We add the boardroom cut, scene strip, and guided motion to make the offer memorable.</p>
+            </article>
+<article class="timeline-card reveal">
+              <p class="timeline-day">Day 5</p>
+              <h3>Qualification flow</h3>
+              <p>We turn the CTA into a real application path instead of a dead contact wall.</p>
+            </article>
+<article class="timeline-card reveal">
+              <p class="timeline-day">Day 6</p>
+              <h3>Proof and polish</h3>
+              <p>We tune hierarchy, trust cues, and decision flow until the page feels decisive.</p>
+            </article>
+<article class="timeline-card reveal">
+              <p class="timeline-day">Day 7</p>
+              <h3>Ship and follow-up</h3>
+              <p>We publish, deliver, archive, and hand over a usable sales asset instead of a forgotten mockup.</p>
+            </article>
+          </div>
+        </section>
+
         <section class="section reveal" id="boardroom">
           <div class="section-head">
             <div>
@@ -1056,10 +1272,13 @@
               <p class="brand-lockup">Application step</p>
               <h2>Request the sprint.</h2>
               <p>This is the low-friction commitment point. The visitor gives only enough signal to qualify the next move, and the page immediately reframes the recommendation instead of dumping them into a blank contact wall.</p>
+              <p>On Vercel, this submission routes into the strategy inbox so the page behaves like an actual sales asset, not just a pretty mockup.</p>
               <p id="focus-note">Start by choosing the revenue problem you want to solve first, then use the form to stage the recommendation.</p>
             </div>
             <article class="signup-card">
               <form class="signup-form" id="signup-form">
+                <input type="hidden" name="focus" id="focus-input" value="appointments" />
+                <input class="field-hidden" name="website" tabindex="-1" autocomplete="off" />
                 <div class="field-grid">
                   <label>Full name
                     <input name="name" required placeholder="Jordan Reed" />
@@ -1103,8 +1322,9 @@
                 <label>What does the current front end get wrong?
                   <textarea name="note" placeholder="Example: we get traffic, but the wrong people keep asking for cheap work."></textarea>
                 </label>
-                <button class="signup-submit" type="submit">Stage The Recommendation</button>
+                <button class="signup-submit" type="submit">Request The Sprint Review</button>
               </form>
+              <p class="signup-status" id="signup-status">Submissions route straight to the strategy inbox. If the live endpoint is unavailable, the page still stages the recommendation locally.</p>
               <div class="result-card" id="result-card">
                 <strong>Recommendation drafted</strong>
                 <p id="result-text"></p>
@@ -1124,6 +1344,7 @@
       const heroLead = document.getElementById("hero-lead");
       const primaryCta = document.getElementById("primary-cta");
       const focusNote = document.getElementById("focus-note");
+      const focusInput = document.getElementById("focus-input");
       const masterAudio = document.getElementById("master-audio");
       const activeScene = document.getElementById("active-scene");
       const trackButtons = [...document.querySelectorAll(".track-button")];
@@ -1131,9 +1352,17 @@
       const transcriptCards = [...document.querySelectorAll(".transcript-card")];
       const revealNodes = [...document.querySelectorAll(".reveal")];
       const counters = [...document.querySelectorAll("[data-counter]")];
+      const calcInputs = [...document.querySelectorAll("[data-calc]")];
+      const calcQualified = document.getElementById("calc-qualified");
+      const calcHours = document.getElementById("calc-hours");
+      const calcUpside = document.getElementById("calc-upside");
+      const calcTier = document.getElementById("calc-tier");
+      const calcSummary = document.getElementById("calc-summary");
       const signupForm = document.getElementById("signup-form");
+      const signupStatus = document.getElementById("signup-status");
       const resultCard = document.getElementById("result-card");
       const resultText = document.getElementById("result-text");
+      const submitButton = signupForm.querySelector(".signup-submit");
 
       const focusMap = {
         appointments: {
@@ -1166,6 +1395,7 @@
         heroLead.textContent = current.lead;
         primaryCta.textContent = current.cta;
         focusNote.textContent = current.note;
+        if (focusInput) focusInput.value = focus;
         localStorage.setItem("sharpe_digital_focus", focus);
       }
 
@@ -1260,6 +1490,41 @@
       }, { threshold: 0.35 });
       counters.forEach((node) => counterObserver.observe(node));
 
+      function formatMoney(value) {
+        const rounded = Number.isFinite(value) ? value : 0;
+        return new Intl.NumberFormat("en-US", {
+          style: "currency",
+          currency: "USD",
+          maximumFractionDigits: 0,
+        }).format(rounded);
+      }
+
+      function calculateBusinessCase() {
+        const leads = Math.max(Number(document.querySelector('[data-calc="leads"]').value || 0), 0);
+        const closeRate = Math.max(Number(document.querySelector('[data-calc="close"]').value || 0), 0) / 100;
+        const dealSize = Math.max(Number(document.querySelector('[data-calc="deal"]').value || 0), 0);
+        const badFitRate = Math.max(Number(document.querySelector('[data-calc="badfit"]').value || 0), 0) / 100;
+
+        const currentQualified = leads * (1 - badFitRate);
+        const currentWins = currentQualified * closeRate;
+        const improvedBadFitRate = Math.max(badFitRate * 0.6, 0);
+        const improvedQualified = leads * (1 - improvedBadFitRate);
+        const improvedCloseRate = Math.min(closeRate + 0.04, 0.45);
+        const improvedWins = improvedQualified * improvedCloseRate;
+        const quarterlyUpside = Math.max((improvedWins - currentWins) * dealSize * 3, 0);
+        const recoveredHours = leads * badFitRate * 0.75 * 3;
+        const suggestedTier = quarterlyUpside >= 45000 ? "Flagship Experience" : quarterlyUpside >= 15000 ? "Growth System" : "Rapid Launch";
+
+        calcQualified.textContent = Math.round(currentQualified).toString();
+        calcHours.textContent = Math.round(recoveredHours).toString();
+        calcUpside.textContent = formatMoney(quarterlyUpside);
+        calcTier.textContent = suggestedTier;
+        calcSummary.textContent = "At this profile, tightening qualification and trust could create about " + formatMoney(quarterlyUpside) + " in directional 90-day upside while recovering roughly " + Math.round(recoveredHours) + " hours from bad-fit conversations.";
+      }
+
+      calcInputs.forEach((input) => input.addEventListener("input", calculateBusinessCase));
+      calculateBusinessCase();
+
       function recommendTier(revenue, constraint) {
         if (revenue === "scale" || constraint === "premium-positioning") {
           return {
@@ -1279,7 +1544,28 @@
         };
       }
 
-      signupForm.addEventListener("submit", (event) => {
+      async function submitApplication(payload) {
+        const response = await fetch("/api/apply", {
+          method: "POST",
+          headers: {
+            "Content-Type": "application/json",
+          },
+          body: JSON.stringify(payload),
+        });
+        const text = await response.text();
+        let data = {};
+        try {
+          data = text ? JSON.parse(text) : {};
+        } catch (_error) {
+          data = {};
+        }
+        if (!response.ok) {
+          throw new Error(data.error || text || ("Request failed with HTTP " + response.status));
+        }
+        return data;
+      }
+
+      signupForm.addEventListener("submit", async (event) => {
         event.preventDefault();
         const formData = new FormData(signupForm);
         const name = formData.get("name");
@@ -1288,9 +1574,35 @@
         const constraint = formData.get("constraint");
         const focus = localStorage.getItem("sharpe_digital_focus") || "appointments";
         const recommendation = recommendTier(revenue, constraint);
+        const payload = Object.fromEntries(formData.entries());
+        payload.focus = focus;
+        payload.recommendation = recommendation.tier;
+
         resultText.textContent = name + ", " + company + " is best staged into " + recommendation.tier + ". Focus first on " + focus.replace("-", " ") + ". " + recommendation.note;
         resultCard.classList.add("is-visible");
-        localStorage.setItem("sharpe_digital_application", JSON.stringify(Object.fromEntries(formData.entries())));
+        localStorage.setItem("sharpe_digital_application", JSON.stringify(payload));
+
+        signupStatus.textContent = "Sending the application to the strategy inbox...";
+        signupStatus.className = "signup-status";
+        submitButton.disabled = true;
+        submitButton.textContent = "Sending...";
+
+        try {
+          const apiResult = await submitApplication(payload);
+          signupStatus.textContent = apiResult.message || "Application sent to the strategy inbox.";
+          signupStatus.classList.add("status-ok");
+          if (apiResult.recommendation && apiResult.recommendation.note) {
+            resultText.textContent = name + ", " + company + " is best staged into " + apiResult.recommendation.tier + ". " + apiResult.recommendation.note;
+          }
+          signupForm.reset();
+          if (focusInput) focusInput.value = focus;
+        } catch (error) {
+          signupStatus.textContent = "Live send is unavailable in this environment, so the recommendation was staged locally instead. " + error.message;
+          signupStatus.classList.add("status-warn");
+        } finally {
+          submitButton.disabled = false;
+          submitButton.textContent = "Request The Sprint Review";
+        }
       });
     </script>
   </body>
